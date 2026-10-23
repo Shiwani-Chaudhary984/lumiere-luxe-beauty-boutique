@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière Beauty Nepal — Luxury Cosmetics Store</title>
+  <meta name="description" content="Handcrafted clean Himalayan skincare, radiant lip elixirs, and luxury complexion cosmetics with responsive shopping, cart, wishlist, and demo checkout." />
+  <meta property="og:title" content="Lumière Beauty Nepal — Luxury Cosmetics Store" />
+  <meta property="og:description" content="Handcrafted clean Himalayan skincare, radiant lip elixirs, and luxury complexion cosmetics." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
+  
+  <!-- Material Symbols Outlined Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Pure Vanilla CSS Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+
+  <!-- ======================================================================
+       SITE HEADER & ANNOUNCEMENT BAR
+       ====================================================================== -->
+  <header class="site-header">
+    <!-- Top Announcement Strip -->
+    <div class="announcement-bar">
+      <p>Free shipping across Nepal on orders over NPR 4,000 | Use code <strong>GLOW15</strong> for 15% off</p>
+    </div>
+
+    <!-- Main Header Bar -->
+    <div class="lumiere-container">
+      <div class="header-main">
+        <!-- Left: Search & Mobile Menu Trigger -->
+        <div class="header-left">
+          <button class="icon-btn mobile-menu-btn" onclick="openMobileMenu()" title="Open Menu" aria-label="Open Navigation Menu">
+            <span class="material-symbols-outlined text-[24px]">menu</span>
+          </button>
+
+          <div class="search-bar-wrap">
+            <input type="text" id="headerSearchInput" class="search-input" placeholder="Search formulations, lip oils, serums..." />
+            <button class="search-btn" onclick="const q = document.getElementById('headerSearchInput').value; if(q){ state.searchQuery = q; navigateTo('shop'); }" aria-label="Search">
+              <span class="material-symbols-outlined text-[18px]">search</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Center: Brand Identity -->
+        <div class="brand-center" onclick="navigateTo('home')">
+          <span class="brand-logo-text">Lumière Beauty</span>
+          <span class="brand-tagline">Glow With Confidence</span>
+        </div>
+
+        <!-- Right: Currency, Wishlist, Cart, Profile -->
+        <div class="header-right">
+          <div class="currency-badge hidden sm:flex">
+            <span class="material-symbols-outlined text-[16px]">payments</span>
+            <span>NPR (Rs.)</span>
+          </div>
+
+          <button class="icon-btn" onclick="navigateTo('wishlist')" title="Wishlist" aria-label="View Wishlist">
+            <span class="material-symbols-outlined text-[22px]">favorite</span>
+            <span id="wishlistBadgeCount" class="badge-count" style="display: none;">0</span>
+          </button>
+
+          <button class="icon-btn" onclick="openCartDrawer()" title="Shopping Bag" aria-label="View Shopping Bag">
+            <span class="material-symbols-outlined text-[22px]">shopping_bag</span>
+            <span id="cartBadgeCount" class="badge-count secondary" style="display: none;">0</span>
+          </button>
+
+          <button class="user-avatar-btn" onclick="navigateTo('account')" title="My Account" aria-label="My Account">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Links (Desktop) -->
+      <nav class="header-nav" aria-label="Primary Navigation">
+        <a class="nav-link active" data-route="home" onclick="navigateTo('home')">Home</a>
+        <a class="nav-link" data-route="shop" onclick="navigateTo('shop')">Shop</a>
+        <a class="nav-link" data-route="categories" onclick="navigateTo('home'); document.getElementById('categoriesSection')?.scrollIntoView({behavior: 'smooth'});">Categories</a>
+        <a class="nav-link" data-route="about-us" onclick="navigateTo('about-us')">About Us</a>
+        <a class="nav-link" data-route="contact" onclick="navigateTo('contact')">Contact</a>
+        <a class="nav-link" data-route="faq" onclick="navigateTo('faq')">FAQ</a>
+        <a class="nav-link" onclick="openProjectGuide()" style="color: var(--secondary); font-weight: 700;">
+          <span class="material-symbols-outlined text-[15px]">school</span> Project Guide
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Slide-Out Drawer -->
+  <aside id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="brand-center" onclick="navigateTo('home'); closeMobileMenu();">
+        <span class="brand-logo-text" style="font-size: 18px;">Lumière Beauty</span>
+        <span class="brand-tagline">Glow With Confidence</span>
+      </div>
+      <button class="icon-btn" onclick="closeMobileMenu()" title="Close menu" aria-label="Close menu">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a class="mobile-nav-link active" data-route="home" onclick="navigateTo('home')">
+        <span>Home</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="shop" onclick="navigateTo('shop')">
+        <span>Shop Formulations</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="categories" onclick="navigateTo('home'); closeMobileMenu(); setTimeout(() => document.getElementById('categoriesSection')?.scrollIntoView({behavior:'smooth'}), 100);">
+        <span>Atelier Collections</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="cart" onclick="navigateTo('cart')">
+        <span>Shopping Bag</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="wishlist" onclick="navigateTo('wishlist')">
+        <span>Wishlist</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="about-us" onclick="navigateTo('about-us')">
+        <span>About Us</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="contact" onclick="navigateTo('contact')">
+        <span>Contact Atelier</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="faq" onclick="navigateTo('faq')">
+        <span>FAQ</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" data-route="account" onclick="navigateTo('account')">
+        <span>Demo Account & Orders</span> <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+      </a>
+      <a class="mobile-nav-link" onclick="openProjectGuide(); closeMobileMenu();" style="color: var(--secondary);">
+        <span>University Project Guide</span> <span class="material-symbols-outlined text-[16px]">school</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- Cart Slide-Out Drawer -->
+  <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-header">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[22px]">shopping_bag</span>
+        <h3 class="font-display text-lg text-text-main">Shopping Bag</h3>
+      </div>
+      <button class="icon-btn" onclick="closeCartDrawer()" title="Close Cart" aria-label="Close Cart">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+
+    <!-- Free Delivery Progress Bar -->
+    <div class="free-ship-bar-wrap">
+      <p id="freeShipMsg" class="free-ship-msg">
+        Free insured delivery on orders over NPR 4,000 across Nepal
+      </p>
+      <div class="free-ship-progress">
+        <div id="freeShipProgress" class="free-ship-fill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Items Scroll Area -->
+    <div id="cartDrawerItems" class="cart-items-scroll"></div>
+
+    <!-- Empty State -->
+    <div id="cartDrawerEmpty" class="empty-state-box" style="display: none;">
+      <div class="empty-state-icon">
+        <span class="material-symbols-outlined text-[32px]">shopping_bag</span>
+      </div>
+      <h4 class="font-display text-lg text-text-main mb-1">Your Bag is Empty</h4>
+      <p class="text-xs text-text-muted max-w-xs mb-4">
+        Explore our clean Himalayan skincare and velvety lip lacquers.
+      </p>
+      <button class="btn-primary text-xs py-2 px-6" onclick="closeCartDrawer(); navigateTo('shop');">
+        Explore Formulations
+      </button>
+    </div>
+
+    <!-- Cart Footer with Totals -->
+    <div id="cartDrawerTotals" class="cart-footer"></div>
+  </aside>
+
+  <!-- Backdrop for Drawers -->
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+
+  <!-- ======================================================================
+       MAIN CONTENT CONTAINER WITH ROUTED PAGE VIEWS
+       ====================================================================== -->
+  <main>
+    
+    <!-- --------------------------------------------------------------------
+         VIEW 1: HOME PAGE
+         -------------------------------------------------------------------- -->
+    <div class="page-view active" data-page="home">
+      
+      <!-- HERO BANNER -->
+      <section class="hero-section">
+        <div class="ambient-glow-1"></div>
+        <div class="ambient-glow-2"></div>
+        
+        <div class="lumiere-container">
+          <div class="hero-grid">
+            <!-- Left Text Column -->
+            <div>
+              <div class="hero-tag">
+                <span class="pulse-dot"></span>
+                <span>L'Édition Printemps • Himalaya Glow</span>
+              </div>
+              <h1 class="hero-title">
+                Unveil Your <br />
+                <em>Natural Radiance</em>
+              </h1>
+              <p class="hero-lead">
+                Handcrafted clean skincare, radiant lip lacquers, and velvety complexion essentials designed to enhance your authentic glow with high-altitude botanical alchemy.
+              </p>
+              
+              <div class="hero-cta-group">
+                <button class="btn-primary" onclick="navigateTo('shop')">
+                  Explore Shop
+                </button>
+                <button class="btn-secondary" onclick="document.getElementById('bestsellersSection')?.scrollIntoView({behavior: 'smooth'})">
+                  Discover Best Sellers
+                  <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </button>
+              </div>
+
+              <!-- Trust Badges Strip -->
+              <div class="trust-badges-strip">
+                <div class="trust-badge-item">
+                  <span class="material-symbols-outlined">cruelty_free</span>
+                  <div>
+                    <div class="badge-text-title">100% Cruelty-Free</div>
+                    <div class="badge-text-sub">Leaping Bunny Certified</div>
+                  </div>
+                </div>
+                <div class="trust-badge-item">
+                  <span class="material-symbols-outlined">verified</span>
+                  <div>
+                    <div class="badge-text-title">Derm Tested</div>
+                    <div class="badge-text-sub">Safe for Sensitive Skin</div>
+                  </div>
+                </div>
+                <div class="trust-badge-item">
+                  <span class="material-symbols-outlined">spa</span>
+                  <div>
+                    <div class="badge-text-title">Clean Botanicals</div>
+                    <div class="badge-text-sub">Wild Sea Buckthorn</div>
+                  </div>
+                </div>
+                <div class="trust-badge-item">
+                  <span class="material-symbols-outlined">local_shipping</span>
+                  <div>
+                    <div class="badge-text-title">Nepal Express</div>
+                    <div class="badge-text-sub">Kathmandu 24h & Beyond</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Image Column -->
+            <div>
+              <div class="hero-image-stack">
+                <div class="hero-main-frame">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtNwANaYqrtiErTlWdZFStbAwF5P-AYtvpnCr857Y4y120_G80uS3OFxMnqSKN9GKg8WBomIUgc2aeJWPCf_xgdBHE4T95I52zauoe3dPdcMl9vBIzw_Wh46tch7-d7mKbeEFjb3wKOv7dokgFHkZ14uBu-kRKpKy5tvVEAIzQrsnysw2OYcpcZO6cjZ9dBH6YEiQB1viJDWSXVlA08ApQ124bQ20ayfPEa728Wd3h_zzokAgyVt9q" alt="Radiant Himalayan Beauty Model" onerror="this.src='./public/assets/aistudio/Image_1_23d43465.png'" />
+                  
+                  <div class="hero-glass-card">
+                    <div>
+                      <p class="font-caps text-secondary text-[10px]">Featured Formulation</p>
+                      <h4 class="hero-glass-title">Aura Dew Drops</h4>
+                      <p class="hero-glass-price">NPR 3,450</p>
+                    </div>
+                    <button class="hero-glass-btn" onclick="addToCart(8, 1)" title="Add Aura Dew Drops" aria-label="Add Aura Dew Drops to cart">
+                      <span class="material-symbols-outlined text-[18px]">add</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Overlapping Accent Image -->
+                <div class="hero-floating-flacon">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYDr-aMoZC7yYbG8niRA0axT3MqzIam3CEICNXsDgC9QpKFHmM1VPy5nREyyg0WCZP8q0JmGVSNSkSRbWjLzTS-bQGkL8Lmdoh29c4dpJn8UtL_4pjHxzA0Fn0CaaHCKrXA2ziMalk_zNH2qhlXKJOYwMLIuvHPz5wkiPE7rFvjjjp2USh6V_DZK1Nm9UHZWjyNQ0DPRR6V2-1YtANJoLt19UhcPYx7PlMAsKX_xM0GK9C-bYzKebs" alt="Minimalist flacon" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ATELIER COLLECTIONS / CATEGORIES -->
+      <section class="categories-section" id="categoriesSection">
+        <div class="lumiere-container">
+          <div class="section-head">
+            <div>
+              <span class="section-subtitle">Atelier Collections</span>
+              <h2 class="section-title">Formulated For Every Ritual</h2>
+            </div>
+            <p class="section-desc">
+              Discover artisanal complexion essentials crafted with Himalayan floral tinctures and pure mineral pigments.
+            </p>
+          </div>
+
+          <div class="category-circles-grid">
+            <div class="category-card" onclick="state.activeCategory = 'skincare'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz8N5WSn-0YeP3A8fPIFHPuBve62ht8NWDUkT134zZEq8ocUcJuzIxF_eMVPx0-SlZcwE-GVevzpHMDIPkqg0fgJLsV2hNvw4WlLNDVc9GeOc0G_lf0267EoB5V5eXJN01IkbKuGrTkGEdPDmsMEfY_XCEhRq27HV4cbDqxJgBXHPqo_rDPtBK6f4EwIusoXm4rvRk8wPTc5zasS0XBPG0pF-9Cca1biiSEEhSNJwqfdnoX216xz60" alt="Skincare Category" />
+              </div>
+              <span class="category-name">Skincare</span>
+              <span class="category-count">18 Elixirs</span>
+            </div>
+
+            <div class="category-card" onclick="state.activeCategory = 'lipsticks'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDH8-8JzAjA34W6_zcifvGPaLbFajVKQZW_6UINRL8qdxDvNZQ92t-lRe-Yndo8aQjCfZyqJFM9d6-hgUYt8G0pYZN5dDdc4H_c7tmPs4eA3nZxzlRudRI_yLx7YA12mBGkFzdlvpNAOSZq1zFepQsa7rrnKi6YdAkm1amqjZ40z3ufHLvb7KTZls4-Sn_OjNcoY6Jeg-p47H-wIm0-99nY2uAqXmtsLVwDct2ZHwhN0DrzoKIdXzRm" alt="Lipsticks Category" />
+              </div>
+              <span class="category-name">Lipsticks</span>
+              <span class="category-count">24 Shades</span>
+            </div>
+
+            <div class="category-card" onclick="state.activeCategory = 'foundations'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuLreC4SIMdh4NomkSAI9UnZ_ZCg5XKPYkrdBw8TjeTsVL70i4ldIIuJWjKUXHvWxQlXAHWfAYjAbnqB3koTFXdYX26JnNws9WD9_40wFHT8DSza4-NX8WL9oXVrJwCldv5P-PRqh0bHqa3JkIEobshg7DI6MCs3e3H-FVbxMVULWMPMw8l62S0IAtq2ffa-LNVmIUf_tcNkzYeIvrH1dR1s1czy_MRxAZId15jVYfGKbxaVYvgoPQ" alt="Complexion Category" />
+              </div>
+              <span class="category-name">Foundations</span>
+              <span class="category-count">16 Fluid Shades</span>
+            </div>
+
+            <div class="category-card" onclick="state.activeCategory = 'eyes'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTOlImN_2Qapu9ggpQEgc3NFb2A31GFHDCniultYH1hpzC3lg85QijbAVAeAb730kFKdgoeUSHvMmdISVkhJE9wCcEGsF_Ae-4llhle7IsR87lwhuyx7TKIumIGweb88AUVbvsz5zgb5-YaA6i6Nr3d7q9u_sbxOlXjsKvQiZwZzJKSSikaQjONeXJ7pSvEufiko3XpgxGaJdJdEI9mP88wTCo2v1x3gfay5YaH6pZxHtCYzqsKUHX" alt="Eyes Category" />
+              </div>
+              <span class="category-name">Eyes</span>
+              <span class="category-count">12 Palettes</span>
+            </div>
+
+            <div class="category-card" onclick="state.activeCategory = 'fragrance'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuATw9dnFdLosuvZ9xlE2jNSJWvz6GsXlvE6exgG37uHLgVvEHI1JO9bAFsLW2brppO3OX72seFZ6gazHj_eqq6lwPhdvq7m7n9jtcXea8kh8fj-sXW79z9RcelOIDKabGf7JWr_NPYVbOJXqGrAI--uLS-HS9_aEW-QhABbBTYyAYFG0Zhm4hiuhIysnJ1odz429LY3bWrV7wn_2mEYz3cSoVcKWHDw6LKyHZwqtPEYLjeNr7GRVqHW" alt="Fragrance Category" />
+              </div>
+              <span class="category-name">Fragrance</span>
+              <span class="category-count">6 Scents</span>
+            </div>
+
+            <div class="category-card" onclick="state.activeCategory = 'haircare'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl7tOziXbnOlkljziNrF6ZjXw6dLkI606dNpdSTQlP94fv8155ZxwGOBL6mpvNA4Qb6Ia7BFyDuHPFLV8tms_d_uPtH2GAm8_OSHg47VcqFOxvcqzWHcQwq6481jKo3n8AEOLpeZDy_2TaKgCskMv3GBtrTagH4mL5E32uOpCgUteHa3GhbKSfWXwV5Z0TsCxp7fk6oG6BVzdCjvuF6DnXGNs0EM24tdJbozl1pYqtynlfU2XYVLu4" alt="Haircare Category" />
+              </div>
+              <span class="category-name">Haircare</span>
+              <span class="category-count">8 Remedies</span>
+            </div>
+
+            <div class="category-card" onclick="state.activeCategory = 'tools'; navigateTo('shop');">
+              <div class="category-circle">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcu5mrsl3yu_RyWjfvdoxZSUHMD1z5ZX4mL4cQ9yEfsdXTbwMqOgFEp76cSOD5jRFr4kbjEEQAL2Xnh6cda0t0b_WhHYFlHO-HcR8gBIGqKep943mvj4f879J9N_lXDkZjogzRCcfTvXHL4MJiGQOXbLjAdKGPmkgc1jlFSRYPlmWk9VhEhh5Fid9OIRkyUs2-NBEXHGHbt0Q53BK8lWRgQ9Ddn-sxSpEqqxf4UFypWOzJKUnwh_WW" alt="Tools Category" />
+              </div>
+              <span class="category-name">Tools</span>
+              <span class="category-count">9 Implements</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CELEBRATED BEST SELLERS -->
+      <section class="py-16 bg-surface-low/60" id="bestsellersSection">
+        <div class="lumiere-container">
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <span class="section-subtitle">Iconic Essentials</span>
+              <h2 class="section-title">Celebrated Best Sellers</h2>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="bestPrevBtn" class="icon-btn" style="background-color: var(--surface); box-shadow: var(--shadow-sm);" title="Previous Formulations" aria-label="Previous Formulations">
+                <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+              </button>
+              <button id="bestNextBtn" class="icon-btn" style="background-color: var(--surface); box-shadow: var(--shadow-sm);" title="Next Formulations" aria-label="Next Formulations">
+                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Best 4 Products Grid -->
+          <div class="products-grid">
+            <!-- Product 1: Highland Rose Radiant Serum -->
+            <div class="product-card">
+              <div class="product-thumb-wrap" onclick="navigateTo('product-details', 1)">
+                <img class="product-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_8y1x8TgjaH70pP3nGvX5aA_DfugTASQbcW41aI1TBSEtBCFVksABGRKNYt3ypy4TZ1csdIeoS8x9bmW4McqzZAt9rZoywboB79BPvwiHxQYQ3fSAsHikNhoG9IncMQVEOxJDQmmDm7uRW3FoybBbFjFuMvo6bpRCZXiw0Fsd6f0226m3Qt9DvfZFpZ3tWaWLc6qmaBcFg5XaHcl5c_CAzAy9eB1is09rVZTHoBpItGiFkrhBcYmB" alt="Highland Rose Radiant Serum" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag primary">Save 15%</span>
+                </div>
+                <button class="product-wish-btn" data-id="1" title="Wishlist" onclick="event.stopPropagation(); toggleWishlist(1)">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <div class="product-quick-bar">
+                  <button class="quick-view-action-btn" onclick="event.stopPropagation(); openQuickView(1)">
+                    <span class="material-symbols-outlined text-[15px]">visibility</span> Quick View
+                  </button>
+                  <button class="quick-add-action-btn" onclick="event.stopPropagation(); addToCart(1, 1)">
+                    <span class="material-symbols-outlined text-[15px]">shopping_bag</span> Add
+                  </button>
+                </div>
+              </div>
+              <div class="product-info-wrap">
+                <div>
+                  <div class="product-rating-row">
+                    <div class="star-rating">
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                    </div>
+                    <span class="rating-count">(142)</span>
+                  </div>
+                  <h3 class="product-title" onclick="navigateTo('product-details', 1)">Highland Rose Radiant Serum</h3>
+                  <p class="product-sub-desc">Hydration with pure Himalayan Damask rose extract</p>
+                </div>
+                <div class="product-price-row">
+                  <div>
+                    <span class="current-price">NPR 3,825</span>
+                    <span class="original-price">NPR 4,500</span>
+                  </div>
+                  <span class="font-caps text-[10px] text-secondary">Best Seller</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 2: Velvet Lip Soufflé - Kasthamandap -->
+            <div class="product-card">
+              <div class="product-thumb-wrap" onclick="navigateTo('product-details', 2)">
+                <img class="product-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClDQrirQIJBfB2zp_5tSX6ocGFOXQDAQEJNL3LhovpQ-1hDB05ZU5nn0DKxEQPx9c0L09UVL7sYrl2qMnogyL4uYH7rgL_E3FrwXT9YW4amJ1KFmyGQoh1Dpbv9KPhDMVXDiLR6b_Y3yC4ixpQE1rTotyU9qt37VwWJ-lDwJSItETvC3az-JMNeiXJalGEwLSlbdE6rSK0poPU14aw-DdoVB6UmlmmspHcL8kkBqY549o7JX4Hh-52" alt="Velvet Lip Soufflé" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag secondary">Save 15%</span>
+                </div>
+                <button class="product-wish-btn" data-id="2" title="Wishlist" onclick="event.stopPropagation(); toggleWishlist(2)">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <div class="product-quick-bar">
+                  <button class="quick-view-action-btn" onclick="event.stopPropagation(); openQuickView(2)">
+                    <span class="material-symbols-outlined text-[15px]">visibility</span> Quick View
+                  </button>
+                  <button class="quick-add-action-btn" onclick="event.stopPropagation(); addToCart(2, 1)">
+                    <span class="material-symbols-outlined text-[15px]">shopping_bag</span> Add
+                  </button>
+                </div>
+              </div>
+              <div class="product-info-wrap">
+                <div>
+                  <div class="product-rating-row">
+                    <div class="star-rating">
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star_half</span>
+                    </div>
+                    <span class="rating-count">(89)</span>
+                  </div>
+                  <h3 class="product-title" onclick="navigateTo('product-details', 2)">Velvet Lip Soufflé - Kasthamandap</h3>
+                  <p class="product-sub-desc">Silky weightless crimson berry finish</p>
+                </div>
+                <div class="product-price-row">
+                  <div>
+                    <span class="current-price">NPR 2,125</span>
+                    <span class="original-price">NPR 2,500</span>
+                  </div>
+                  <span class="font-caps text-[10px] text-secondary">Popular</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 3: Lumière Silken Mineral Cushion -->
+            <div class="product-card">
+              <div class="product-thumb-wrap" onclick="navigateTo('product-details', 3)">
+                <img class="product-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwdlVYCo5m7Oxk2nkCZgG6D1bmuY0xY9qxpBaJ4mPonTX0sINv7rmZuOCbtjLDpU0VMaWZ1Z9PxQNndrK0p3aW499jVZOOWybF6cdm0O94MASX0P-eMlr-5jF_dj0iUIx-d2PKcGoVXGJdtUer2hX_RhzuX7wjdPowEgo7lyzYaM60_wqwsBpg4xmW3jDi_aV0miVQ3UovXk6BUPYuc5ujREYClgkq73x2meuZAcCxP_OwpGhKhJtA" alt="Lumière Silken Mineral Cushion" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag primary">Save 15%</span>
+                </div>
+                <button class="product-wish-btn" data-id="3" title="Wishlist" onclick="event.stopPropagation(); toggleWishlist(3)">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <div class="product-quick-bar">
+                  <button class="quick-view-action-btn" onclick="event.stopPropagation(); openQuickView(3)">
+                    <span class="material-symbols-outlined text-[15px]">visibility</span> Quick View
+                  </button>
+                  <button class="quick-add-action-btn" onclick="event.stopPropagation(); addToCart(3, 1)">
+                    <span class="material-symbols-outlined text-[15px]">shopping_bag</span> Add
+                  </button>
+                </div>
+              </div>
+              <div class="product-info-wrap">
+                <div>
+                  <div class="product-rating-row">
+                    <div class="star-rating">
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                    </div>
+                    <span class="rating-count">(216)</span>
+                  </div>
+                  <h3 class="product-title" onclick="navigateTo('product-details', 3)">Lumière Silken Mineral Cushion</h3>
+                  <p class="product-sub-desc">SPF 45 PA+++ glass skin coverage</p>
+                </div>
+                <div class="product-price-row">
+                  <div>
+                    <span class="current-price">NPR 4,080</span>
+                    <span class="original-price">NPR 4,800</span>
+                  </div>
+                  <span class="font-caps text-[10px] text-secondary">Award Winner</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 4: Chomolungma Glow Highlighter -->
+            <div class="product-card">
+              <div class="product-thumb-wrap" onclick="navigateTo('product-details', 4)">
+                <img class="product-thumb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZUjyZrrrsOEdBQFHd6Q0ppQs_Fb9re1YLGl-mJxnKhovklvZomMy-n2h011jk0DtXPz2FWlbiwIqr8LqZUMR3hFEze2kbpNhsywpTMW5Wuku2Q2ZU_qkNCiBZHSlnm6avmFDOE5KG0yuw5t3Q29u9fC6-qLjavS5TKBHivYW1R6LNkQZ43fnP-IfSTvaMq2eiCmhEjJjbRM4Up1-BX0uN2uWQZBFDaCwCJBVP8cr17ebpqvaeC8rF" alt="Chomolungma Glow Highlighter" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag secondary">Save 15%</span>
+                </div>
+                <button class="product-wish-btn" data-id="4" title="Wishlist" onclick="event.stopPropagation(); toggleWishlist(4)">
+                  <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <div class="product-quick-bar">
+                  <button class="quick-view-action-btn" onclick="event.stopPropagation(); openQuickView(4)">
+                    <span class="material-symbols-outlined text-[15px]">visibility</span> Quick View
+                  </button>
+                  <button class="quick-add-action-btn" onclick="event.stopPropagation(); addToCart(4, 1)">
+                    <span class="material-symbols-outlined text-[15px]">shopping_bag</span> Add
+                  </button>
+                </div>
+              </div>
+              <div class="product-info-wrap">
+                <div>
+                  <div class="product-rating-row">
+                    <div class="star-rating">
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                      <span class="material-symbols-outlined filled text-[15px]">star</span>
+                    </div>
+                    <span class="rating-count">(94)</span>
+                  </div>
+                  <h3 class="product-title" onclick="navigateTo('product-details', 4)">Chomolungma Glow Highlighter</h3>
+                  <p class="product-sub-desc">Ultra-fine champagne prism mineral glaze</p>
+                </div>
+                <div class="product-price-row">
+                  <div>
+                    <span class="current-price">NPR 2,975</span>
+                    <span class="original-price">NPR 3,500</span>
+                  </div>
+                  <span class="font-caps text-[10px] text-secondary">Trending</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPECIAL OFFER SPOTLIGHT BANNER -->
+      <section class="py-12 bg-surface">
+        <div class="lumiere-container">
+          <div class="special-offer-banner">
+            <div class="offer-grid">
+              <!-- Left Image -->
+              <div class="offer-image-box">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuANLIXf7Vev19hoE9ocXGyGGfkyNyr1teT4-mjlzeCXOd8-3hr-aoJ86eR2IuxCLcP41Untdz9jkX8aqQ_AD61IeYPyzJuSvlBTRClUxnlES7GyHxM-tFdiknX8Th5xqgyU1DzUSEAGyn-aWmPzxe9v0maO8Q18oinJoBBMgqqjymGkftUXlSldiVKVpUMIzS9dYGkiIQ7J--he1xkK3lYfP82EqvpoxOGc9Uopd04Wwn5MUDXls5wc" alt="The Rose Gold Radiance Box" />
+                <div class="offer-tag-float">
+                  <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
+                  Limited Edition • Only 75 Vaults
+                </div>
+              </div>
+
+              <!-- Right Content -->
+              <div>
+                <span class="font-caps text-primary">Kathmandu Atelier Collector's Edition</span>
+                <h2 class="font-display text-3xl text-text-main mt-1 mb-2">The Rose Gold Radiance Box</h2>
+                <p class="text-sm text-text-muted mb-4">
+                  An all-inclusive ritual vault uniting our four best-selling Himalayan formulations in an engraved keepsake coffret.
+                </p>
+
+                <div class="price-comparison-box">
+                  <div>
+                    <span class="text-[10px] uppercase font-bold text-text-muted block">Special Bundle Price</span>
+                    <span class="bundle-price">NPR 5,800</span>
+                  </div>
+                  <div class="border-l border-border pl-4">
+                    <span class="text-xs text-outline line-through block">Value: NPR 7,200</span>
+                    <span class="font-caps text-secondary text-[11px] font-bold">Save NPR 1,400 Today</span>
+                  </div>
+                </div>
+
+                <ul class="offer-bullets">
+                  <li>
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Full-size Highland Rose Radiant Serum (50ml)</span>
+                  </li>
+                  <li>
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Kasthamandap Berry Velvet Lip Soufflé</span>
+                  </li>
+                  <li>
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Mini Chomolungma Glow Compact & Vegan Atelier Brush</span>
+                  </li>
+                  <li>
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Complimentary Handcrafted Saffron Cleansing Bar</span>
+                  </li>
+                </ul>
+
+                <!-- Live Countdown -->
+                <div class="countdown-wrap">
+                  <p class="font-caps text-text-main text-[10px] mb-1">Offer Concludes In:</p>
+                  <div class="countdown-boxes">
+                    <div class="count-unit">
+                      <span id="countdownHours" class="count-num">14</span>
+                      <span class="count-lbl">Hours</span>
+                    </div>
+                    <span class="count-colon">:</span>
+                    <div class="count-unit">
+                      <span id="countdownMinutes" class="count-num">36</span>
+                      <span class="count-lbl">Mins</span>
+                    </div>
+                    <span class="count-colon">:</span>
+                    <div class="count-unit">
+                      <span id="countdownSeconds" class="count-num">48</span>
+                      <span class="count-lbl">Secs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-4">
+                  <button class="btn-primary" onclick="addToCart(13, 1); openCartDrawer();">
+                    Claim Offer Now
+                  </button>
+                  <span class="text-xs text-text-muted">Includes free insured courier delivery across Nepal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- NEW ARRIVALS & TRENDING PICKS (TABBED) -->
+      <section class="tabbed-section">
+        <div class="lumiere-container">
+          <div class="text-center max-w-xl mx-auto mb-6">
+            <span class="section-subtitle">Freshly Formulated</span>
+            <h2 class="section-title">New Arrivals & Trending Picks</h2>
+            <p class="section-desc mx-auto mt-2">
+              Explore modern innovations blending high-altitude alpine botanicals with peptide-infused cosmetic performance.
+            </p>
+
+            <div class="tab-nav-bar">
+              <button class="tab-btn active" data-tab="all">All Curations</button>
+              <button class="tab-btn" data-tab="serums">Alpine Serums</button>
+              <button class="tab-btn" data-tab="lips">Hydrating Lip Oils</button>
+              <button class="tab-btn" data-tab="cushions">Silky Cushions</button>
+            </div>
+          </div>
+
+          <!-- Tab Items Mosaic -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Item 1: Glacial Edelweiss Peptide Ampoule -->
+            <div class="tab-item bg-surface rounded-2xl overflow-hidden border border-border shadow-sm flex flex-col justify-between" data-category="serums">
+              <div class="aspect-square bg-surface-container overflow-hidden relative cursor-pointer" onclick="navigateTo('product-details', 5)">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxEDSUWPIml-jlx5LPLe3li7UvkI9AyeI6_Bx8w2Q0H92cEQ2vpzvyoe-90ichuGi_sYF09lHHU9uVIZwYXzgVNn_AMIf8PhZZeGQ0PJTrUOblUZnYRbdO11F3GqFRxWxIKeo_VS-o9OCshOyCd1Mf6V7C6mjvffMhtLHmiKGJ1Ri2sussaLkA7ulAMjZHpXY-0W_Qf6485rzAcREw9mkC8UFsKBfcv0wLDOtd56xjfxAMamfRt2O6" alt="Glacial Edelweiss" class="w-full h-full object-cover transition-transform hover:scale-105" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag outline">New Arrival</span>
+                </div>
+              </div>
+              <div class="p-5 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-caps text-secondary text-[10px]">High Altitude Actives</span>
+                  <h3 class="font-bold text-base text-text-main mt-1 cursor-pointer" onclick="navigateTo('product-details', 5)">Glacial Edelweiss Peptide Ampoule</h3>
+                  <p class="text-xs text-text-muted mt-1">Deep micro-hydration for barrier defense against harsh mountain winds.</p>
+                </div>
+                <div class="flex items-center justify-between mt-4 pt-2">
+                  <span class="font-bold text-primary text-base">NPR 3,650</span>
+                  <button class="btn-outline py-2 px-4 text-[10px]" onclick="addToCart(5, 1)">Add to Bag</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2: Nectar Glaze Plumping Lip Oil -->
+            <div class="tab-item bg-surface rounded-2xl overflow-hidden border border-border shadow-sm flex flex-col justify-between" data-category="lips">
+              <div class="aspect-square bg-surface-container overflow-hidden relative cursor-pointer" onclick="navigateTo('product-details', 6)">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFizHOK47HvrZ7Qfrk0QGSQsvFHJ7z96_zmy4Ifqpv3WFhWd6UrIVshh4vrZBzfeSaocLB-YSltIZErkvGQCnp5CLGc2htMED67xacgYSmaI3RqoOjrvlCZl4ewUidzpqW4Z05Y7EC8q9gEPqLoNiPvrqhmPP1LZiSbE_khHnv1Vok3VQi2cOoKdBMcupmBgzDKXNQXxXLO1s--LPcqVDkPojAJsmR8JeDp7eL_N-7IYkw0HB6Bg1U" alt="Nectar Glaze" class="w-full h-full object-cover transition-transform hover:scale-105" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag secondary">Trending Now</span>
+                </div>
+              </div>
+              <div class="p-5 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-caps text-secondary text-[10px]">Pure Squalane Infused</span>
+                  <h3 class="font-bold text-base text-text-main mt-1 cursor-pointer" onclick="navigateTo('product-details', 6)">Nectar Glaze Plumping Lip Oil</h3>
+                  <p class="text-xs text-text-muted mt-1">Non-sticky mirror sheen infused with wild seabuckthorn & vitamin E.</p>
+                </div>
+                <div class="flex items-center justify-between mt-4 pt-2">
+                  <span class="font-bold text-primary text-base">NPR 1,850</span>
+                  <button class="btn-outline py-2 px-4 text-[10px]" onclick="addToCart(6, 1)">Add to Bag</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3: Silk Veil Air Cushion Compact -->
+            <div class="tab-item bg-surface rounded-2xl overflow-hidden border border-border shadow-sm flex flex-col justify-between" data-category="cushions">
+              <div class="aspect-square bg-surface-container overflow-hidden relative cursor-pointer" onclick="navigateTo('product-details', 7)">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5SohEc06NJEc4lIwHD8YlfgXyymwvCEvelG3bHkE2wZ-Dd630PSdcBufzgdaOMXLMijF39vc955qdoT1biaqLGGeVGAWswqQOT7LfV4WOSuR7LbAhUw3tGiDrJ35RzmOR79JG_YJceP5hdzdSXA2HAzSIzPXNe6FtEAPdcrzqUjyuifa689a1lAVxzWzlt40ez-jtbyENOB5RAp3CicNWy0hBcNPB59YYS4TrpJ_D4fWvpjFrZ2tT" alt="Silk Veil Air Cushion" class="w-full h-full object-cover transition-transform hover:scale-105" />
+                <div class="product-badge-overlay">
+                  <span class="badge-tag outline">New Arrival</span>
+                </div>
+              </div>
+              <div class="p-5 flex flex-col flex-1 justify-between">
+                <div>
+                  <span class="font-caps text-secondary text-[10px]">Velveteen Matte Finish</span>
+                  <h3 class="font-bold text-base text-text-main mt-1 cursor-pointer" onclick="navigateTo('product-details', 7)">Silk Veil Air Cushion Compact</h3>
+                  <p class="text-xs text-text-muted mt-1">Weightless breathability with 12-hour humidity resilience for South Asian climate.</p>
+                </div>
+                <div class="flex items-center justify-between mt-4 pt-2">
+                  <span class="font-bold text-primary text-base">NPR 3,900</span>
+                  <button class="btn-outline py-2 px-4 text-[10px]" onclick="addToCart(7, 1)">Add to Bag</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRAISE FROM BEAUTY DEVOTEES (TESTIMONIALS) -->
+      <section class="testimonials-section">
+        <div class="lumiere-container">
+          <div class="text-center max-w-xl mx-auto mb-8">
+            <span class="section-subtitle">Voices of Luminosity</span>
+            <h2 class="section-title">Praise from Beauty Devotees</h2>
+            <div class="inline-block mt-2 px-4 py-1 rounded-full bg-surface-container text-xs text-text-muted">
+              Sample Client Reflections & Verified Experiences
+            </div>
+          </div>
+
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div>
+                <div class="star-rating mb-3">
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                </div>
+                <p class="testimonial-quote">
+                  "The Highland Rose Serum completely healed my winter dryness in Pokhara. My skin looks so effortlessly lit from within—not oily, just fresh Himalayan morning dew."
+                </p>
+              </div>
+              <div class="patron-info">
+                <div class="patron-avatar">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQDvBPk6DNSLUNWh7vGha19zpnrRhAq4_BGB-xmt5JkSi5cuNfHgFZ1X04uiFVRoY4k4f3yNaC5Y_vk_PHtdH44KzTIZfsraMVCCPRVgy2cih6mZg8zyM7ArC-KTEIBpS-C4KOp13dcI7EHlWmyXK6MdsNYFntQL5oLqZxuPCz3k8OCHeWh9_IPSR7RVYtrst0VMLH2lGLEkyUqK3cK891RRgPqpiSFsAeZor5T4cyHiSF_OTxQu0i" alt="Pooja Shrestha" />
+                </div>
+                <div>
+                  <h4 class="patron-name">Pooja Shrestha</h4>
+                  <p class="patron-loc">Kathmandu • Verified Patron</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div>
+                <div class="star-rating mb-3">
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                </div>
+                <p class="testimonial-quote">
+                  "Finding warm undertone lipsticks that don't dry out in dry Kathmandu weather is rare. Kasthamandap berry souffle is my absolute signature daily shade now."
+                </p>
+              </div>
+              <div class="patron-info">
+                <div class="patron-avatar">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuACx-J2ZacYq3I44BJBst_p7cNFga5Xl1mBRI3jHgemDHhRajJ6fdtKmrAcrYSGuJGowdJkwRdfO3R7kByUFKPaCYBQYNz__WzDE-LEI7vZub4BBbijDUEjAeOQXUo37nQNpxEn4kyngDMi1_6jgWJJK7a-9TQsS9GjMFbRS1n-qOew3hMqrXfNTJGpuF1olhxaV5X50ck6SYN7253bscK2smqqD2is1AotRqXwcKsIUX1LyOeRC6tn" alt="Ananya Gurung" />
+                </div>
+                <div>
+                  <h4 class="patron-name">Ananya Gurung</h4>
+                  <p class="patron-loc">Lalitpur • Verified Patron</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div>
+                <div class="star-rating mb-3">
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                  <span class="material-symbols-outlined filled text-[18px]">star</span>
+                </div>
+                <p class="testimonial-quote">
+                  "Fastest delivery I have experienced in Nepal. It arrived in Jhapa within 48 hours packed in satin wrapping with personal shade advice notes. Truly 5-star luxury!"
+                </p>
+              </div>
+              <div class="patron-info">
+                <div class="patron-avatar">
+                  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0HLXyhmdiI9gMw4CjZuy39HcCXpIcqueWrbhFh049lLLoQ764HNHBCNIi_Muxzc5B4faQ1D5C5-yC5QHdwQ8iqwMqWtzZnsx3c3TAf6WKCCrIiyVgYQzczVQ3SLFAm-gpxzjM4EA6WwUg482-zM7wQnqTQSx1E3wiBUWp2KRovbiE3_OZAAbQ2dR3ZfFxTu4MWrHOuLLKRa6K0bGFbiQ-4KLW5tmUk9sIpd4zYCpMrItUIfgGEw17" alt="Dikshya Rana" />
+                </div>
+                <div>
+                  <h4 class="patron-name">Dikshya Rana</h4>
+                  <p class="patron-loc">Jhapa • Verified Patron</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 PERKS STRIP -->
+      <section class="perks-section">
+        <div class="lumiere-container">
+          <div class="perks-grid">
+            <div class="perk-card">
+              <div class="perk-icon-circle">
+                <span class="material-symbols-outlined">local_shipping</span>
+              </div>
+              <h4 class="perk-title">Free Nepal Shipping</h4>
+              <p class="perk-desc">Complimentary delivery on all orders exceeding NPR 4,000 across all 7 provinces.</p>
+            </div>
+
+            <div class="perk-card">
+              <div class="perk-icon-circle">
+                <span class="material-symbols-outlined">published_with_changes</span>
+              </div>
+              <h4 class="perk-title">14-Day Easy Exchange</h4>
+              <p class="perk-desc">Not the exact shade match? Seamless exchanges arranged directly through our Kathmandu concierge.</p>
+            </div>
+
+            <div class="perk-card">
+              <div class="perk-icon-circle">
+                <span class="material-symbols-outlined">featured_seasonal_and_gifts</span>
+              </div>
+              <h4 class="perk-title">Luxury Gift Packaging</h4>
+              <p class="perk-desc">Every shipment arrives housed in bespoke rose-gold foiled coffrets and textured protective wrap.</p>
+            </div>
+
+            <div class="perk-card">
+              <div class="perk-icon-circle">
+                <span class="material-symbols-outlined">support_agent</span>
+              </div>
+              <h4 class="perk-title">Dedicated Beauty Advisor</h4>
+              <p class="perk-desc">Receive personalized skin tone and formulation counsel via direct WhatsApp consultation.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTAGRAM COMMUNITY & NEWSLETTER -->
+      <section class="community-section">
+        <div class="lumiere-container">
+          <div class="flex items-end justify-between mb-6">
+            <div>
+              <span class="section-subtitle">#LumiereGlowClub</span>
+              <h2 class="section-title">Captured in the Light</h2>
+            </div>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="font-caps text-primary flex items-center gap-1 hover:text-secondary">
+              Follow @LumiereBeautyNP <span class="material-symbols-outlined text-[15px]">arrow_outward</span>
+            </a>
+          </div>
+
+          <div class="insta-grid">
+            <div class="insta-box">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDezT1lUx-k6kZ68YJPw2-lPAwOaZ4FtNWPnVE__Ak_ZQtk0_QQhjiOqdjAXvCx3_lImSk55t0MXOVaQ1xDl-B301EL56-F_iiBXC5qTugkU2OJ4eZkN-qbyCuxuTAkoB7Q3239G5929_rTVhoeD5fsFdwIxY81sp6rVtbN3fZzwcX2U1m0gdX1ocaEP1J196W0l2ACudooME5t13NYJ6gG0veN51ocBNq0dr-NdNnGGynrwJWqsH-o" alt="Instagram Post 1" />
+              <div class="insta-overlay">
+                <span class="material-symbols-outlined text-[24px]">favorite</span>
+              </div>
+            </div>
+
+            <div class="insta-box">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCczfG24LOiBgrT6z4mkVwwEMFmeunHH9nQp6lgiT3k5HyzMioUKjEQG-QKuKNq-Id0veDXyRXChyyPeqpH7_nNiZ2NOutyOsuNHZXq4KsnhMg7GGs6WbSptzGU4lOhHkQszL-vT4HKFVyqdU5NysR6U2Ly8i8Obc1s9AW8WpsJM2JLdxOoGCqroCBO2_E3wT7GxcqebXBeqHqu0lWs9nWMSI6DLjDR036WjMxPLi8DgwD8hoLtGIxD" alt="Instagram Post 2" />
+              <div class="insta-overlay">
+                <span class="material-symbols-outlined text-[24px]">favorite</span>
+              </div>
+            </div>
+
+            <div class="insta-box hidden sm:block">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEvxJcdMB8_YmRGU2veY_KHgWmQw65zdJCn7IckvwwfMtweLmpoDAmUM3MFc2T8FttzHKtQWLFRcBeIx9ZzvGeBtXLBEIGTBqWGmEU0dwWdGLvia3tamc3K6A5DuFG4JhUU8WqtGSSKmi2-RHpIrtGzB6IOPQLML26hL__rkp27pNJhKJnNTcQH1-sylcbguxBvayXa4nOR03UcCNkpKnoznt6feg5iT-Dg_lCFr6OjeD0XwYe39OP" alt="Instagram Post 3" />
+              <div class="insta-overlay">
+                <span class="material-symbols-outlined text-[24px]">favorite</span>
+              </div>
+            </div>
+
+            <div class="insta-box">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa6JBlwp-hrebwjLTk3rGLtgB-PlxgHWmOuoenaNunhM_fZyOUOaccBdZqyWjJz_pyK_4-wlyTFVBbE0vn_Akq8IpGbua36dRD4W38rZ6gDPMzTtnl3omXGFMEYVKHdW_0ChhE4sEeMaL7mlSu760kajJ5H65zjcbOzM9lMlLRW88jjZjMsCaYh0IUI1PUYrUsCAte0LDzVQ0B3xuFLHGhB8Ov298JX8E9RUZvK6fqmD_Wecqm-JcT" alt="Instagram Post 4" />
+              <div class="insta-overlay">
+                <span class="material-symbols-outlined text-[24px]">favorite</span>
+              </div>
+            </div>
+
+            <div class="insta-box hidden lg:block">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAufLtsB0J2blAKpLxGaI_tFu_W5-OdHbHJiWSM-2QuB8rvnwyFS7QNj5mhLL4tQBEE5HKdVEbLF9zdkUYC5okfbGvuK07rWvV-lKDc7YoAp2eopf72yUyiI_pUSViHu34bYdKxAk3rKTOaUZ1rK93UmCBzaSft902bEAaXDUw7Au5wu2cL3K4WsoQYwkQXMGw3hdpPlAiQEGx9CGXMbxa4paaL7-pBD8k6APPmga6triouxxpCQwQ-" alt="Instagram Post 5" />
+              <div class="insta-overlay">
+                <span class="material-symbols-outlined text-[24px]">favorite</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletter Invitation -->
+          <div class="newsletter-card">
+            <span class="font-caps text-secondary text-[11px]">Private Client Invitation</span>
+            <h3 class="font-display text-2xl text-text-main mt-1 mb-2">Receive 15% Off Your First Ritual</h3>
+            <p class="text-sm text-text-muted max-w-md mx-auto mb-4">
+              Subscribe to receive private salon preview invitations, seasonal botanical formulations, and VIP invitations to our Durbar Marg boutique masterclasses.
+            </p>
+
+            <form id="homeNewsletterForm" class="newsletter-form">
+              <input type="email" id="newsletterEmailInput" class="newsletter-input" placeholder="Enter your email address" required />
+              <button type="submit" class="btn-primary text-xs py-3 px-6 whitespace-nowrap">
+                Claim 15%
+              </button>
+            </form>
+            <p id="newsletterSuccessMsg" class="hidden text-xs text-primary font-semibold mt-3">
+              Thank you for subscribing! Your code <span class="text-secondary font-bold">GLOW15</span> is active.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 2: SHOP CATALOG (28 PRODUCTS, FILTERS & SEARCH)
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="shop">
+      <div class="lumiere-container shop-page-wrap">
+        
+        <div class="shop-banner">
+          <span class="section-subtitle">Full Formulation Catalog</span>
+          <h1 class="font-display text-3xl text-text-main mt-1">The Atelier Collection</h1>
+          <p class="text-sm text-text-muted max-w-lg mx-auto mt-2">
+            28 artisanal formulations crafted with hand-harvested high-altitude Himalayan actives and radiant mineral pigments.
+          </p>
+        </div>
+
+        <div class="shop-layout">
+          <!-- Filter Sidebar -->
+          <aside class="shop-filter-sidebar">
+            <div class="flex items-center justify-between pb-3 border-b border-border mb-4">
+              <h3 class="font-display text-base text-text-main">Filter Catalog</h3>
+              <button class="text-xs text-primary underline" onclick="resetShopFilters()">Reset All</button>
+            </div>
+
+            <!-- Search Field -->
+            <div class="filter-group">
+              <label class="filter-heading">Search Atelier</label>
+              <input type="text" id="shopSearchInput" class="form-input w-full text-xs" placeholder="Search by name, active..." />
+            </div>
+
+            <!-- Categories -->
+            <div class="filter-group">
+              <label class="filter-heading">Categories</label>
+              <ul class="filter-category-list">
+                <li class="filter-category-item active" data-cat="all">All Formulations <span>28</span></li>
+                <li class="filter-category-item" data-cat="skincare">Skincare & Elixirs <span>8</span></li>
+                <li class="filter-category-item" data-cat="lipsticks">Lipsticks & Lip Oils <span>5</span></li>
+                <li class="filter-category-item" data-cat="foundations">Complexion & Cushion <span>5</span></li>
+                <li class="filter-category-item" data-cat="eyes">Eyes & Brow Artistry <span>4</span></li>
+                <li class="filter-category-item" data-cat="cheeks">Cheek Bloom & Bronzers <span>3</span></li>
+                <li class="filter-category-item" data-cat="tools">Atelier Tools & Sets <span>2</span></li>
+                <li class="filter-category-item" data-cat="haircare">Botanical Haircare <span>1</span></li>
+              </ul>
+            </div>
+
+            <!-- Price Slider -->
+            <div class="filter-group">
+              <div class="flex justify-between items-center mb-1">
+                <label class="filter-heading mb-0">Max Price (NPR)</label>
+                <span id="priceDisplayVal" class="text-xs font-bold text-primary">NPR 6,000</span>
+              </div>
+              <input type="range" id="priceRangeSlider" class="price-range-slider" min="1000" max="6000" step="250" value="6000" />
+              <div class="price-indicator-row">
+                <span>NPR 1,000</span>
+                <span>NPR 6,000</span>
+              </div>
+            </div>
+
+            <!-- Quick Filter Chips -->
+            <div class="filter-group">
+              <label class="filter-heading">Curated Filters</label>
+              <div class="quick-filter-chips">
+                <button class="filter-chip active" data-tag="all">All</button>
+                <button class="filter-chip" data-tag="bestseller">Best Sellers</button>
+                <button class="filter-chip" data-tag="sale">On Sale (15%)</button>
+                <button class="filter-chip" data-tag="under2500">Under NPR 2,500</button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Products Main Area -->
+          <section>
+            <!-- Controls Bar -->
+            <div class="shop-controls-bar">
+              <div class="flex items-center gap-4">
+                <button class="mobile-filter-trigger" onclick="alert('Use the filter sidebar above to filter the catalog')">
+                  <span class="material-symbols-outlined text-[16px]">tune</span> Filters
+                </button>
+                <span id="shopResultsCount" class="shop-results-count">Showing 28 formulations</span>
+              </div>
+
+              <div class="shop-sort-wrap">
+                <label for="shopSortSelect" class="text-xs text-text-muted font-semibold">Sort By:</label>
+                <select id="shopSortSelect" class="shop-sort-select">
+                  <option value="featured">Featured Curations</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="rating">Highest Patron Rating</option>
+                  <option value="name">Alphabetical (A-Z)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Grid -->
+            <div id="shopProductsGrid" class="products-grid"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 3: PRODUCT DETAILS
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="product-details">
+      <div class="lumiere-container product-details-wrap">
+        <div id="productDetailsContent"></div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 4: DEDICATED CART PAGE
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="cart">
+      <div class="lumiere-container py-10">
+        <div class="text-center max-w-lg mx-auto mb-8">
+          <span class="section-subtitle">Your Selection</span>
+          <h1 class="font-display text-3xl text-text-main mt-1">Review Your Ritual</h1>
+        </div>
+        <div id="cartPageContent"></div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 5: WISHLIST PAGE
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="wishlist">
+      <div class="lumiere-container py-10">
+        <div class="text-center max-w-lg mx-auto mb-8">
+          <span class="section-subtitle">Private Curations</span>
+          <h1 class="font-display text-3xl text-text-main mt-1">Your Beauty Wishlist</h1>
+        </div>
+        <div id="wishlistPageContent"></div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 6: CHECKOUT PAGE
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="checkout">
+      <div class="lumiere-container checkout-page-wrap">
+        <div class="text-center max-w-lg mx-auto mb-8">
+          <span class="section-subtitle">Private Atelier Dispatch</span>
+          <h1 class="font-display text-3xl text-text-main mt-1">Delivery & Checkout</h1>
+          <p class="text-xs text-text-muted mt-1">Fast & insured courier delivery across all 7 provinces of Nepal</p>
+        </div>
+
+        <form onsubmit="handleCheckoutSubmit(event)">
+          <div class="checkout-grid">
+            <!-- Left Form Column -->
+            <div>
+              <!-- Customer Info -->
+              <div class="checkout-card">
+                <h3 class="checkout-section-title">
+                  <span class="material-symbols-outlined text-primary">person</span>
+                  1. Patron Contact Information
+                </h3>
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label class="form-label" for="checkoutName">Full Name *</label>
+                    <input type="text" id="checkoutName" class="form-input" placeholder="e.g. Shraddha Shrestha" required />
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="checkoutEmail">Email Address *</label>
+                    <input type="email" id="checkoutEmail" class="form-input" placeholder="e.g. patron@example.com" required />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="checkoutPhone">Mobile Phone (Nepal +977) *</label>
+                  <input type="tel" id="checkoutPhone" class="form-input" placeholder="e.g. 9841234567" required />
+                </div>
+              </div>
+
+              <!-- Delivery Address -->
+              <div class="checkout-card">
+                <h3 class="checkout-section-title">
+                  <span class="material-symbols-outlined text-primary">local_shipping</span>
+                  2. Nepal Delivery Address
+                </h3>
+                <div class="form-grid-2">
+                  <div class="form-field">
+                    <label class="form-label" for="checkoutProvince">Province *</label>
+                    <select id="checkoutProvince" class="form-select" required>
+                      <option value="Bagmati (Kathmandu Valley & Beyond)">Bagmati Province (Kathmandu / Lalitpur / Bhaktapur)</option>
+                      <option value="Gandaki (Pokhara)">Gandaki Province (Pokhara, Kaski)</option>
+                      <option value="Koshi (Biratnagar/Dharan)">Koshi Province (Jhapa, Morang)</option>
+                      <option value="Lumbini (Butwal/Bhairahawa)">Lumbini Province</option>
+                      <option value="Madhesh (Janakpur/Birgunj)">Madhesh Province</option>
+                      <option value="Sudurpashchim (Dhangadhi)">Sudurpashchim Province</option>
+                      <option value="Karnali (Surkhet)">Karnali Province</option>
+                    </select>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="checkoutCity">City / District *</label>
+                    <input type="text" id="checkoutCity" class="form-input" placeholder="e.g. Kathmandu" required />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="checkoutAddress">Street Address / Landmark *</label>
+                  <input type="text" id="checkoutAddress" class="form-input" placeholder="e.g. Durbar Marg, House 42, Opposite Narayanhiti Gate" required />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="checkoutNotes">Delivery Notes (Optional)</label>
+                  <textarea id="checkoutNotes" class="form-textarea" placeholder="e.g. Please call before arrival or leave with security."></textarea>
+                </div>
+              </div>
+
+              <!-- Payment Method Selection -->
+              <div class="checkout-card">
+                <h3 class="checkout-section-title">
+                  <span class="material-symbols-outlined text-primary">credit_card</span>
+                  3. Select Payment Method
+                </h3>
+                
+                <label class="payment-method-card selected">
+                  <div class="payment-radio-left">
+                    <input type="radio" name="payment_method" value="eSewa Mobile Wallet" checked />
+                    <div>
+                      <strong class="text-sm block">eSewa Mobile Wallet</strong>
+                      <span class="text-xs text-text-muted">Direct digital wallet transfer</span>
+                    </div>
+                  </div>
+                  <span class="demo-payment-badge">Instant Demo</span>
+                </label>
+
+                <label class="payment-method-card">
+                  <div class="payment-radio-left">
+                    <input type="radio" name="payment_method" value="Khalti Digital Wallet" />
+                    <div>
+                      <strong class="text-sm block">Khalti Digital Wallet</strong>
+                      <span class="text-xs text-text-muted">Pay securely via Khalti app</span>
+                    </div>
+                  </div>
+                  <span class="demo-payment-badge">Instant Demo</span>
+                </label>
+
+                <label class="payment-method-card">
+                  <div class="payment-radio-left">
+                    <input type="radio" name="payment_method" value="ConnectIPS" />
+                    <div>
+                      <strong class="text-sm block">ConnectIPS</strong>
+                      <span class="text-xs text-text-muted">Inter-bank real-time account transfer</span>
+                    </div>
+                  </div>
+                  <span class="demo-payment-badge">Demo</span>
+                </label>
+
+                <label class="payment-method-card">
+                  <div class="payment-radio-left">
+                    <input type="radio" name="payment_method" value="Cash on Delivery (COD)" />
+                    <div>
+                      <strong class="text-sm block">Cash on Delivery (COD)</strong>
+                      <span class="text-xs text-text-muted">Pay upon parcel arrival at your doorstep</span>
+                    </div>
+                  </div>
+                  <span class="demo-payment-badge">Popular</span>
+                </label>
+
+                <p class="text-[11px] text-text-muted mt-3">
+                  <strong>University Project Notice:</strong> Simulated payments only. No actual financial cards, passwords, or monetary deductions take place.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Order Summary Column -->
+            <div>
+              <div class="checkout-card sticky top-36">
+                <div id="checkoutOrderSummary"></div>
+
+                <button type="submit" id="checkoutSubmitBtn" class="btn-primary w-full mt-4 text-xs py-4">
+                  Complete Order & Reserve Ritual
+                </button>
+                <button type="button" class="btn-secondary w-full mt-2 text-xs" onclick="navigateTo('cart')">
+                  Back to Bag
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 7: ORDER CONFIRMATION
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="order-confirmation">
+      <div class="lumiere-container">
+        <div id="orderConfirmationContent"></div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 8: ABOUT US
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="about-us">
+      <div class="lumiere-container py-12">
+        <div class="editorial-hero-banner">
+          <span class="section-subtitle">Our Himalayan Heritage</span>
+          <h1 class="font-display text-4xl text-text-main mt-1 mb-3">High-Altitude Botanical Alchemy</h1>
+          <p class="text-base text-text-muted max-w-2xl mx-auto leading-relaxed">
+            Rooted in the pristine valleys of the Himalayas, Lumière Beauty bridges centuries of traditional South Asian botanical knowledge with contemporary peptide cosmetic science.
+          </p>
+        </div>
+
+        <div class="about-story-grid">
+          <div>
+            <span class="font-caps text-secondary">The Atelier Story</span>
+            <h2 class="font-display text-3xl text-text-main mt-1 mb-4">Born in Kathmandu, Elevated for the World</h2>
+            <p class="text-sm text-text-muted leading-relaxed mb-4">
+              Founded in 2024 at our Durbar Marg salon atelier, Lumière Beauty was conceived from a single observation: the unique Himalayan climate—dry mountain winds, intense ultraviolet exposure, and drastic temperature shifts—requires skincare that heals, fortifies, and illuminates without heaviness.
+            </p>
+            <p class="text-sm text-text-muted leading-relaxed mb-4">
+              We collaborate directly with indigenous botanical farming cooperatives in Manang, Mustang, and Dolpa who sustainably hand-harvest wild Damask roses, seabuckthorn berries, and alpine edelweiss at altitudes exceeding 3,000 meters.
+            </p>
+            <div class="flex items-center gap-4 pt-2">
+              <div class="border-l-2 border-primary pl-4">
+                <p class="font-display text-lg italic text-text-main">"True luxury is botanical purity, ethical stewardship, and luminous self-confidence."</p>
+                <span class="text-xs text-text-muted mt-1 block">— Master Formulator, Kathmandu Atelier</span>
+              </div>
+            </div>
+          </div>
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-md bg-surface-high">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtNwANaYqrtiErTlWdZFStbAwF5P-AYtvpnCr857Y4y120_G80uS3OFxMnqSKN9GKg8WBomIUgc2aeJWPCf_xgdBHE4T95I52zauoe3dPdcMl9vBIzw_Wh46tch7-d7mKbeEFjb3wKOv7dokgFHkZ14uBu-kRKpKy5tvVEAIzQrsnysw2OYcpcZO6cjZ9dBH6YEiQB1viJDWSXVlA08ApQ124bQ20ayfPEa728Wd3h_zzokAgyVt9q" alt="Atelier Story" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <!-- Three Core Pillars -->
+        <div class="text-center max-w-xl mx-auto mb-8">
+          <span class="section-subtitle">Guiding Philosophies</span>
+          <h2 class="font-display text-2xl text-text-main mt-1">Our Immutable Commitments</h2>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card">
+            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary mx-auto mb-4">
+              <span class="material-symbols-outlined text-[24px]">spa</span>
+            </div>
+            <h4 class="font-display text-lg text-text-main mb-2">Wild Botanical Actives</h4>
+            <p class="text-xs text-text-muted leading-relaxed">
+              Every formula is enriched with cold-pressed alpine elixirs harvested at peak potency to protect sensitive skin barriers.
+            </p>
+          </div>
+
+          <div class="value-card">
+            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary mx-auto mb-4">
+              <span class="material-symbols-outlined text-[24px]">cruelty_free</span>
+            </div>
+            <h4 class="font-display text-lg text-text-main mb-2">100% Cruelty-Free & Vegan</h4>
+            <p class="text-xs text-text-muted leading-relaxed">
+              Certified Leaping Bunny approved. We never test on animals, nor do we employ animal byproducts in any of our pigments.
+            </p>
+          </div>
+
+          <div class="value-card">
+            <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-primary mx-auto mb-4">
+              <span class="material-symbols-outlined text-[24px]">handshake</span>
+            </div>
+            <h4 class="font-display text-lg text-text-main mb-2">Ethical Fair Harvest</h4>
+            <p class="text-xs text-text-muted leading-relaxed">
+              We return 5% of all bottle proceeds directly to Himalayan female cooperative harvesters and mountain conservation trusts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 9: CONTACT US
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="contact">
+      <div class="lumiere-container py-12">
+        <div class="text-center max-w-lg mx-auto mb-10">
+          <span class="section-subtitle">Client Concierge</span>
+          <h1 class="font-display text-3xl text-text-main mt-1">Connect with Our Atelier</h1>
+          <p class="text-sm text-text-muted mt-2">
+            Visit our flagship boutique in Durbar Marg or reach out for shade matching consultations.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left Info Box -->
+          <div class="contact-info-card">
+            <h3 class="font-display text-xl text-text-main mb-6">Kathmandu Flagship Salon</h3>
+
+            <div class="contact-detail-row">
+              <span class="material-symbols-outlined">location_on</span>
+              <div>
+                <strong class="text-sm block text-text-main">Flagship Boutique & Atelier</strong>
+                <p class="text-xs text-text-muted">Durbar Marg (Heritage Arcade, 2nd Level), Kathmandu, Nepal</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row">
+              <span class="material-symbols-outlined">mail</span>
+              <div>
+                <strong class="text-sm block text-text-main">Client Relations Email</strong>
+                <p class="text-xs text-text-muted">concierge@lumierebeauty.com.np</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row">
+              <span class="material-symbols-outlined">call</span>
+              <div>
+                <strong class="text-sm block text-text-main">Direct Telephone & WhatsApp</strong>
+                <p class="text-xs text-text-muted">+977 1 4220000 / +977 9801234567</p>
+              </div>
+            </div>
+
+            <div class="contact-detail-row">
+              <span class="material-symbols-outlined">schedule</span>
+              <div>
+                <strong class="text-sm block text-text-main">Consultation Hours (NPT)</strong>
+                <p class="text-xs text-text-muted">Sunday – Friday: 10:00 AM – 7:00 PM</p>
+                <p class="text-xs text-text-muted">Saturday: 11:00 AM – 5:00 PM</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Validated Contact Form -->
+          <div class="bg-surface p-8 rounded-2xl border border-border shadow-sm">
+            <h3 class="font-display text-xl text-text-main mb-4">Send an Atelier Inquiry</h3>
+            <form onsubmit="handleContactSubmit(event)">
+              <div class="form-grid-2">
+                <div class="form-field">
+                  <label class="form-label" for="contactName">Your Full Name *</label>
+                  <input type="text" id="contactName" class="form-input" placeholder="e.g. Aayush Maharjan" required />
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="contactEmail">Email Address *</label>
+                  <input type="email" id="contactEmail" class="form-input" placeholder="e.g. aayush@example.com" required />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="contactSubject">Inquiry Subject</label>
+                <select id="contactSubject" class="form-select">
+                  <option value="shade">Personal Shade Matching Advice</option>
+                  <option value="order">Order Dispatch & Courier Tracking</option>
+                  <option value="bridal">Bridal Beauty Ritual Consultation</option>
+                  <option value="wholesale">Boutique & Salon Stockist Inquiries</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label class="form-label" for="contactMessage">Message / Formulation Notes *</label>
+                <textarea id="contactMessage" class="form-textarea" placeholder="Describe your skin type, desired shade undertone, or inquiry details..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary w-full text-xs py-3 mt-2">
+                Submit Consultation Request
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 10: FAQ ACCORDION
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="faq">
+      <div class="lumiere-container py-12">
+        <div class="text-center max-w-lg mx-auto mb-10">
+          <span class="section-subtitle">Frequently Asked Questions</span>
+          <h1 class="font-display text-3xl text-text-main mt-1">Answers from Our Chemists</h1>
+          <p class="text-sm text-text-muted mt-2">
+            Everything you need to know regarding our Himalayan botanicals, delivery timeline across Nepal, and order policies.
+          </p>
+        </div>
+
+        <div class="faq-wrap">
+          <div class="faq-item open">
+            <div class="faq-question">
+              <span>What is the standard delivery timeline across Nepal?</span>
+              <span class="material-symbols-outlined text-[20px]">expand_more</span>
+            </div>
+            <div class="faq-answer">
+              We provide express 24-hour courier delivery inside Kathmandu Valley (Kathmandu, Lalitpur, and Bhaktapur). For major cities such as Pokhara, Biratnagar, Chitwan, Dharan, Butwal, and Nepalgunj, shipments arrive safely within 2 to 3 business days. Remote districts arrive within 4 to 5 business days via tracked Nepal Post insured service.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Are Lumière Beauty formulations suitable for sensitive South Asian skin?</span>
+              <span class="material-symbols-outlined text-[20px]">expand_more</span>
+            </div>
+            <div class="faq-answer">
+              Yes, rigorously so. Every formulation is dermatologist tested, non-comedogenic, and hypoallergenic. We refrain from using harsh synthetic perfumes, parabens, sulfates, and drying alcohols. Our alpine edelweiss and high-altitude sea buckthorn extracts are specifically chosen to soothe reactive skin and barrier damage caused by dry Kathmandu winters and intense monsoon humidity.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How do I qualify for Free Shipping across Nepal?</span>
+              <span class="material-symbols-outlined text-[20px]">expand_more</span>
+            </div>
+            <div class="faq-answer">
+              All orders exceeding NPR 4,000 automatically qualify for complimentary insured courier delivery across all 7 provinces of Nepal. For orders below NPR 4,000, a flat fee of NPR 200 is charged to cover secure protective packaging and parcel tracking.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How does the 14-day shade exchange policy work?</span>
+              <span class="material-symbols-outlined text-[20px]">expand_more</span>
+            </div>
+            <div class="faq-answer">
+              If your chosen cushion foundation or concealer shade does not complement your natural undertones, simply notify our Kathmandu concierge within 14 days of delivery. We will arrange a door-to-door courier swap for your corrected shade.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Are all products 100% cruelty-free and vegan?</span>
+              <span class="material-symbols-outlined text-[20px]">expand_more</span>
+            </div>
+            <div class="faq-answer">
+              Absolutely. Lumière Beauty is proud to be certified Leaping Bunny cruelty-free. None of our ingredients or finished cosmetics are tested on animals. Furthermore, our brushes utilize ultra-soft DermaFlex synthetic micro-bristles rather than animal hair.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>What payment methods are supported in the demo experience?</span>
+              <span class="material-symbols-outlined text-[20px]">expand_more</span>
+            </div>
+            <div class="faq-answer">
+              This academic web development project simulates popular Nepali digital wallets (eSewa, Khalti, ConnectIPS) as well as Cash on Delivery (COD) and Credit/Debit Cards. Please note that all transactions are simulated for demonstration purposes and no real charges will occur.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------
+         VIEW 11: DEMO ACCOUNT & ORDER HISTORY
+         -------------------------------------------------------------------- -->
+    <div class="page-view" data-page="account">
+      <div class="lumiere-container py-12">
+        <div class="account-profile-header">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold font-display">
+              LB
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h2 class="font-display text-2xl text-text-main">Patron Concierge Profile</h2>
+                <span class="badge-tag secondary text-[10px]">L'Élite Member</span>
+              </div>
+              <p class="text-xs text-text-muted mt-1">Kathmandu Atelier ID: #PAT-2026-991 • saak4310@gmail.com</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-6">
+            <div class="text-center">
+              <span class="font-display text-2xl text-primary font-bold block">450</span>
+              <span class="text-[10px] text-text-muted uppercase font-bold">Glow Loyalty Points</span>
+            </div>
+            <div class="border-l border-border pl-6">
+              <button class="btn-outline text-xs py-2 px-4" onclick="clearDemoOrders()">
+                Reset Demo History
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Orders Table Card -->
+        <div class="order-history-table-wrap">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-display text-lg text-text-main">Locally Saved Order History</h3>
+              <p class="text-xs text-text-muted">Orders persist locally in your browser via localStorage.</p>
+            </div>
+            <button class="btn-primary text-xs py-2 px-4" onclick="navigateTo('shop')">
+              Place New Order
+            </button>
+          </div>
+
+          <table class="order-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Items & Rituals</th>
+                <th>Total (NPR)</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="accountOrderHistoryBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+  <footer class="site-footer">
+    <div class="lumiere-container">
+      <div class="footer-grid">
+        <!-- Brand Narrative Column -->
+        <div>
+          <div class="brand-center items-start text-left mb-3" onclick="navigateTo('home')">
+            <span class="brand-logo-text" style="font-size: 20px;">Lumière Beauty</span>
+            <span class="brand-tagline">Glow With Confidence</span>
+          </div>
+          <p class="text-xs text-text-muted leading-relaxed max-w-sm mb-4">
+            Handcrafted with botanical purity and high-altitude Himalayan actives. Lumière Beauty celebrates timeless rituals infused with modern cosmetic science to illuminate natural skin luminosity.
+          </p>
+          <div class="text-xs text-text-main">
+            <strong>Flagship Atelier:</strong> Durbar Marg, Kathmandu, Nepal
+          </div>
+        </div>
+
+        <!-- Col 2: Curated Collections -->
+        <div>
+          <h4 class="footer-col-title">Curated Collections</h4>
+          <ul class="footer-links-list">
+            <li><a onclick="state.activeCategory = 'lipsticks'; navigateTo('shop');">Velvet Lip Elixirs</a></li>
+            <li><a onclick="state.activeCategory = 'skincare'; navigateTo('shop');">Highland Hydrating Serums</a></li>
+            <li><a onclick="state.activeCategory = 'foundations'; navigateTo('shop');">Luminous Mineral Cushions</a></li>
+            <li><a onclick="state.activeCategory = 'eyes'; navigateTo('shop');">Chomolungma Prismatic Glow</a></li>
+            <li><a onclick="state.activeCategory = 'tools'; navigateTo('shop');">Rose Quartz Atelier Tools</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Quick Navigation -->
+        <div>
+          <h4 class="footer-col-title">Quick Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a onclick="navigateTo('shop')">All 28 Formulations</a></li>
+            <li><a onclick="navigateTo('about-us')">Our Himalayan Heritage</a></li>
+            <li><a onclick="navigateTo('contact')">Flagship Boutique Kathmandu</a></li>
+            <li><a onclick="navigateTo('faq')">Shipping & Deliveries Nepal</a></li>
+            <li><a onclick="navigateTo('account')">Client Concierge Account</a></li>
+            <li><a onclick="openProjectGuide()" class="text-primary font-bold">University Module Guide</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Customer Care -->
+        <div>
+          <h4 class="footer-col-title">Customer Care</h4>
+          <ul class="footer-links-list">
+            <li><strong class="text-text-main">Kathmandu Atelier & Salon</strong></li>
+            <li>support@lumierebeauty.com.np</li>
+            <li>+977 1 4220000</li>
+            <li class="pt-2 text-secondary font-semibold">Sun – Fri: 10:00 AM – 7:00 PM NPT</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Demo Disclaimer Box -->
+      <div class="demo-disclaimer-box">
+        <strong>Demo Store Notice:</strong> This is a fictional luxury cosmetics experience crafted for academic university presentation and portfolio demonstration purposes. No real monetary transactions or order fulfillments are processed.
+      </div>
+
+      <!-- Footer Bottom Strip -->
+      <div class="footer-bottom-row">
+        <p>© 2026 LUMIÈRE BEAUTY NEPAL. All rights reserved. Built with pure HTML5, CSS3 & Vanilla JavaScript.</p>
+        <div class="payment-gateways-strip">
+          <span>eSewa Verified</span>
+          <span>•</span>
+          <span>Khalti</span>
+          <span>•</span>
+          <span>ConnectIPS</span>
+          <span>•</span>
+          <span>Visa & Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       MODALS: QUICK VIEW & UNIVERSITY GUIDE
+       ====================================================================== -->
+  <!-- Quick View Modal -->
+  <div id="quickViewModal" class="modal-overlay" onclick="if(event.target === this) closeQuickView()">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="closeQuickView()" title="Close" aria-label="Close modal">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+      <div id="quickViewModalBody"></div>
+    </div>
+  </div>
+
+  <!-- University Module Guide Modal -->
+  <div id="projectGuideModal" class="modal-overlay" onclick="if(event.target === this) closeProjectGuide()">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="closeProjectGuide()" title="Close" aria-label="Close modal">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+      <div>
+        <span class="badge-tag primary mb-2">University Project Documentation</span>
+        <h2 class="font-display text-2xl text-text-main mb-2">LUMIÈRE BEAUTY — Web Development Project</h2>
+        <p class="text-xs text-text-muted mb-4">Module Requirements & GitHub Pages Compatibility Guide</p>
+
+        <div class="space-y-4 text-xs text-text-muted leading-relaxed">
+          <div class="bg-surface-low p-4 rounded-xl border border-border">
+            <strong class="text-sm text-text-main block mb-1">1. Module Compliance Summary</strong>
+            <p>• <strong>Strict Vanilla Architecture:</strong> 100% pure HTML5, CSS3, and vanilla JavaScript. Zero React, zero TypeScript dependencies, zero Tailwind runtime or external heavy frameworks.</p>
+            <p>• <strong>Separation of Concerns:</strong> <code>index.html</code> (Markup), <code>css/style.css</code> (Styles), <code>js/products.js</code> (Data), and <code>js/app.js</code> (Behavior).</p>
+            <p>• <strong>Local & GitHub Pages Compatibility:</strong> All resource paths use relative resolution (<code>./css/style.css</code>, <code>./js/app.js</code>, etc.). The website runs directly when double-clicking <code>index.html</code> in a browser without any dev server needed!</p>
+          </div>
+
+          <div class="bg-surface-low p-4 rounded-xl border border-border">
+            <strong class="text-sm text-text-main block mb-1">2. Complete Feature Inventory</strong>
+            <p>• <strong>28 Full Products:</strong> High-altitude Himalayan skincare, lipsticks, mineral cushions, baked highlighters, fragrance, and tools with NPR pricing.</p>
+            <p>• <strong>Dynamic Shopping Bag & Free Shipping Calculator:</strong> Real-time recalculation of subtotals, free shipping threshold (NPR 4,000), coupon code engine (<code>GLOW15</code> = 15% off, <code>FIRSTGLOW</code> = NPR 500 off), and quantity steppers.</p>
+            <p>• <strong>Wishlist & LocalStorage:</strong> Full persistence across browser refreshes.</p>
+            <p>• <strong>Complete Checkout & Invoice Generator:</strong> Nepal province & city validation, simulated payment methods (eSewa, Khalti, ConnectIPS, COD), and auto-save into Patron Order History.</p>
+          </div>
+
+          <div class="bg-surface-low p-4 rounded-xl border border-border">
+            <strong class="text-sm text-text-main block mb-1">3. Moodle Submission Instructions</strong>
+            <p>1. Compress this project folder into a <code>.zip</code> file containing <code>index.html</code> at the root, along with the <code>css/</code> and <code>js/</code> folders.</p>
+            <p>2. Upload the ZIP archive to your university Moodle submission portal.</p>
+            <p>3. Your assessor can unzip and double-click <code>index.html</code> to test every feature instantly.</p>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button class="btn-primary text-xs py-2 px-6" onclick="closeProjectGuide()">
+            Understood & Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Floating Actions (Back to Top & Project Guide) -->
+  <div class="floating-actions-wrap">
+    <button class="floating-btn" onclick="openProjectGuide()" title="University Project Guide" aria-label="Open Project Guide">
+      <span class="material-symbols-outlined text-[20px]">school</span>
+    </button>
+    <button class="floating-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to Top" aria-label="Back to Top">
+      <span class="material-symbols-outlined text-[20px]">north</span>
+    </button>
+  </div>
+
+  <!-- ======================================================================
+       APPLICATION SCRIPTS
+       ====================================================================== -->
+  <script src="./js/products.js"></script>
+  <script src="./js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "name": "Lumière Beauty Nepal — Luxury Cosmetics Store",
+  "description": "Handcrafted clean Himalayan skincare, radiant lip elixirs, and luxury complexion cosmetics with responsive shopping, cart, wishlist, and demo checkout.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
